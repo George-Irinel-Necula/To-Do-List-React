@@ -35,6 +35,7 @@ import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import Task from "./Task";
 import Profile from "./assets/Profile.png";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 
 function App() {
@@ -117,6 +118,7 @@ function App() {
             </div>
           </NavbarBrand>
           <NavbarContent justify="end">
+            <ThemeSwitcher></ThemeSwitcher>
             <Dropdown>
               <DropdownTrigger>
                 <div className="flex items-center gap-2 font-semibold">
