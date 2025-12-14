@@ -1,9 +1,1 @@
-EditLogic
-1.Press button
-2.Title/Desc in Input si ID,Checked,Date in memorie 
-3.Delete task
-4.Add on the same index   Buttonul ar trebuii sa stie daca face edit sau face doar add cu un state toggler editMode
-
-
-LocalStorage
 Theme

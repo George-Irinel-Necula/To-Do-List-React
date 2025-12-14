@@ -34,13 +34,21 @@ import {
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import Task from "./Task";
+import Profile from "./assets/Profile.png";
+
 
 function App() {
-  const [task, setTask] = useState([]);
+  const localStorageVar=localStorage.getItem("Tasks")
+  const localStorageParse=JSON.parse(localStorageVar)
+  const [task, setTask] = useState(localStorageParse!=null?localStorageParse:[]);
+  const [editMode,setEditMode]=useState(false)
+  const [editedTask,setEditedTask]=useState({id:"",title:"",description:""})
+
   function deleteTask(id){
     let taskCopy=[...task]
     taskCopy=taskCopy.filter(item => item.id!=id)
     setTask(taskCopy)
+    localStorage.setItem("Tasks",JSON.stringify(taskCopy))
   }
 
   function autoIncrement(){
@@ -64,16 +72,38 @@ function App() {
     let taskCopy=[...task]
     taskCopy.push({id:autoIncrement(),title:title,description:description,date:setDate(),checked:false})
     setTask(taskCopy)
+    localStorage.setItem("Tasks",JSON.stringify(taskCopy))
+    setEditMode(false)
   }
-  function updateStatus(id,checked){
+  function updateStatus(id,checked){    //Updateaza daca este bifat sau nu
     let taskCopy=[...task]
     for(let i=0;i<taskCopy.length;i++){
       if(taskCopy[i].id==id)
         taskCopy[i].checked=!taskCopy[i].checked
     }
     setTask(taskCopy)
+    localStorage.setItem("Tasks",JSON.stringify(taskCopy))
   }
-  useEffect(()=>{console.log(task)},[task])
+
+  function getTaskInfo(id,title,description){
+    console.log(id+" "+title+" "+description)
+    setEditedTask({id:id,title:title,description:description})
+    console.log("Edited task:")
+    console.log(editedTask)
+  }
+
+  function editTask(id,title,description){
+    let taskCopy=[...task]
+    console.log(id+" "+title+" "+description)
+    for(let i=0;i<taskCopy.length;i++){
+      if(taskCopy[i].id==Number(id)){
+        taskCopy[i].title=title
+        taskCopy[i].description=description
+      }
+    }
+    setTask(taskCopy)
+    localStorage.setItem("Tasks",JSON.stringify(taskCopy))
+  }
 
   return (
     <>
@@ -96,7 +126,7 @@ function App() {
                     color="secondary"
                     name="George Irinel Necula"
                     size="sm"
-                    src="./Profile.png"
+                    src={Profile}
                   ></Avatar>
                   <div className="cursor-pointer flex items-center gap-1 ">
                     <h1 className="hidden sm:flex">George Irinel Necula</h1>
@@ -107,7 +137,7 @@ function App() {
               <DropdownMenu>
                 <DropdownItem key="avatar">
                   <div className="flex items-center gap-2">
-                    <Avatar size="lg" src={"./Profile.png"}></Avatar>
+                    <Avatar size="lg" src={Profile}></Avatar>
                     <div className="flex flex-col gap-2">
                       <h1 className="text-lg font-bold">
                         George Irinel Necula
@@ -144,7 +174,7 @@ function App() {
               Organize your work and life with this To-Do List. Create tasks,
               set priorities, and track progress.
             </p>
-            <AddTask addTask={addTask}></AddTask>
+            <AddTask addTask={addTask} editMode={editMode} editedTask={editedTask} editTask={editTask}></AddTask>
             {task.length!==0?<TaskList className={task.length===0?"hidden":"flex"}>
                 {task.map((t) => (
                   <Task
@@ -156,6 +186,8 @@ function App() {
                     checked={t.checked}
                     deleteTask={deleteTask}
                     updateStatus={updateStatus}
+                    editMode={setEditMode}
+                    getTaskInfo={getTaskInfo}
                   />
                 ))}
               </TaskList>:""}

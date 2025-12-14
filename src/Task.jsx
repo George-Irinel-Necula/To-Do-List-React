@@ -1,14 +1,14 @@
 import { Button, Card, Checkbox, Chip } from "@heroui/react";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
-export default function Task({ title, description, date,id,deleteTask,editTask,checked,updateStatus}) {
+export default function Task({ title, description, date, id ,deleteTask,checked,updateStatus,editMode,getTaskInfo}) {
   return (
     <Card className="bg-default-100">
       <div className="flex">
         <div className="border-3 border-secondary"></div>
         <div className="flex p-6 w-full">
           <div>
-            <Checkbox onChange={()=>updateStatus(id,checked)} size="lg" className="mt-0 mr-1" color="secondary"/>
+            <Checkbox onChange={()=>updateStatus(id,checked)} isSelected={checked?true:false} size="lg" className="mt-0 mr-1" color="secondary"/>
           </div>
 
           <div className="h-auto text-wrap w-full">
@@ -26,8 +26,8 @@ export default function Task({ title, description, date,id,deleteTask,editTask,c
           </div>
 
           <div className="px-2 flex gap-2 flex-col">
-            <Button isIconOnly onClick={()=>deleteTask(id)} startContent={<IconTrash />} />
-            <Button isIconOnly onClick={()=>editTask(id,title,description,checked)} startContent={<IconEdit />} />
+            <Button isIconOnly onPress={()=>deleteTask(id)} startContent={<IconTrash />} />
+            <Button isIconOnly onPress={()=>{editMode(true),getTaskInfo(id,title,description)}} startContent={<IconEdit />} />
           </div>
         </div>
       </div>
