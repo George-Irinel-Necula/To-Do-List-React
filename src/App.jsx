@@ -104,6 +104,7 @@ function App() {
     }
     setTask(taskCopy)
     localStorage.setItem("Tasks",JSON.stringify(taskCopy))
+    setEditMode(false)
   }
 
   return (
