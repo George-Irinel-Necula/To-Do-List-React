@@ -1,7 +1,7 @@
 
 # To Do List React
 
-Keep your tasks in one place
+Keep your tasks in one place locally
 
 Access here:  
 https://george-irinel-necula.github.io/To-Do-List-React/
