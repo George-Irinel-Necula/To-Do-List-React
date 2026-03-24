@@ -15,5 +15,5 @@ https://george-irinel-necula.github.io/To-Do-List-React/
 
 ## Screenshots
 
-![App Screenshot](https://imgur.com/a/sQe5ZoS)
+![App Screenshot](https://i.imgur.com/XIMc0KI.png)
 
