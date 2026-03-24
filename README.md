@@ -1,14 +1,14 @@
 
 # To Do List React
 
-Adaugati taskurile aici si pastreaza-le cu functia automata de salvare
+Keep your tasks in one place
 
-Acceseaza aici:  
+Access here:  
 https://george-irinel-necula.github.io/To-Do-List-React/
 
 ## Tech Stack
 
-**Tehnologii folosite:** React, Vite , HeroUI
+**Tehnologies Used:** React, Vite , HeroUI
 
 
 
